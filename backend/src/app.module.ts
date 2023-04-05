@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
       database: process.env.DB_NAME,
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      entities: ['dist/**/entities/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: true,
       logging: true,
     }),
