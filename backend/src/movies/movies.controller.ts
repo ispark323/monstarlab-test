@@ -1,4 +1,20 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 
-@Controller('movies')
-export class MoviesController {}
+@Controller('api/movies')
+export class MoviesController {
+  @Get()
+  getMovies(@Query() params: any): any {
+    if (params.search) {
+      return { search: params.search };
+    } else {
+      return [{ title: 'Monsters, Inc.' }, { title: 'Matrix' }];
+    }
+  }
+
+  @Get(':id')
+  getOneMovie(@Param('id') id: string) {
+    return {
+      id,
+    };
+  }
+}
