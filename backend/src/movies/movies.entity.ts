@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
-import { User } from 'src/users/users.entity';
+import { User } from '../users/users.entity';
 
 @Entity()
 export class Movie {

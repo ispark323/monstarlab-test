@@ -1,5 +1,5 @@
-import { User } from 'src/users/users.entity';
-import { Movie } from 'src/movies/movies.entity';
+import { User } from './src/users/users.entity';
+import { Movie } from './src/movies/movies.entity';
 import { DataSource } from 'typeorm';
 
 const dataSource = new DataSource({
