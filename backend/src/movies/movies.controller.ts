@@ -7,11 +7,11 @@ export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
-  getMovies(@Query() params: any): any {
+  async getMovies(@Query() params: any): Promise<Movie[]> {
     if (params.search) {
-      return { search: params.search };
+      // return { search: params.search };
     } else {
-      return [{ title: 'Monsters, Inc.' }, { title: 'Matrix' }];
+      return await this.moviesService.findAll();
     }
   }
 
