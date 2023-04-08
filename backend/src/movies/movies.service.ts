@@ -17,4 +17,11 @@ export class MoviesService {
   async findAll(): Promise<Movie[]> {
     return await this.movieRepository.find();
   }
+
+  async findBySearch(search: string): Promise<Movie[]> {
+    return await this.movieRepository
+      .createQueryBuilder('movie')
+      .where('movie.title LIKE :search', { search: `%${search}%` })
+      .getMany();
+  }
 }
