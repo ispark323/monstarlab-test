@@ -10,7 +10,7 @@ const dataSource = new DataSource({
   username: 'test',
   password: 'password',
   entities: [User, Movie],
-  migrations: ['src/migration/**/*.ts'],
+  migrations: ['src/database/migration/**/*.ts'],
   synchronize: true,
 });
 
