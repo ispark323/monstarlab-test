@@ -1,5 +1,24 @@
 version: "3"
 services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    environment:
+      - PORT=8080
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=monstar
+      - DB_USER=test
+      - DB_PASSWORD=password
+      - SECRET=this_is_not_secret
+    depends_on:
+      - db
+
   db:
     image: mysql:5.7
     container_name: db_container
@@ -13,19 +32,6 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-
-  # db:
-  #   image: postgres:14
-  #   volumes:
-  #     - ./postgres/data:/var/lib/postgresql/data
-  #     - ./postgres/initdb:/docker-entrypoint-initdb.d
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     - TZ=Asia/Tokyo
-  #     - POSTGRES_DB=monstar
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=password
 
 volumes:
   db-volume:
