@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 // import { User } from '../users/users.entity';
-// import { Movie } from '../movies/movies.entity';
+import { Movie } from '../movies/movies.entity';
 import { Favorite } from './favorites.entity';
 
 @Injectable()
@@ -11,6 +11,12 @@ export class FavoritesService {
     @InjectRepository(Favorite)
     private readonly favoriteRepository: Repository<Favorite>,
   ) {}
+
+  async getFavorites(userId: number): Promise<Movie[]> {
+    const favorites = await this.favoriteRepository.find({ where: { user: { id: userId } }, relations: ['movie'] });
+
+    return favorites.map((favorite) => favorite.movie);
+  }
 
   async create(userId: number, movieId: number): Promise<Favorite> {
     const favorite = new Favorite();

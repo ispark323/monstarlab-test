@@ -10,8 +10,11 @@ export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) {}
 
   @Get()
-  getFavorites() {
-    return [{ title: 'Monsters, Inc.' }];
+  @UseGuards(JwtAuthGuard)
+  async getFavorites(@Req() req): Promise<Movie[]> {
+    const userId = req.user.userId;
+
+    return this.favoritesService.getFavorites(userId);
   }
 
   @Post(':id')
