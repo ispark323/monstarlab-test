@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
-import { User } from '../users/users.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import { Favorite } from '..//favorites/favorites.entity';
 
-@Entity()
+@Entity('movie')
 export class Movie {
   @PrimaryGeneratedColumn()
   readonly id: number;
@@ -12,7 +12,10 @@ export class Movie {
   @Column('text', { nullable: true })
   desc: string;
 
-  @ManyToMany(() => User, (user) => user.favorites)
-  @JoinTable({ name: 'favorite' })
-  users: User[];
+  // @ManyToMany(() => User, (user) => user.favorites)
+  // @JoinTable()
+  // favorites: Favorite[];
+
+  @OneToMany(() => Favorite, (favorite) => favorite.movie, { onDelete: 'SET NULL' })
+  favorites: Favorite[];
 }
