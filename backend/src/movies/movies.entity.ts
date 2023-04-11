@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Favorite } from '..//favorites/favorites.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Favorite } from '../favorites/favorites.entity';
 
 @Entity('movie')
 export class Movie {
@@ -11,10 +11,6 @@ export class Movie {
 
   @Column('text', { nullable: true })
   desc: string;
-
-  // @ManyToMany(() => User, (user) => user.favorites)
-  // @JoinTable()
-  // favorites: Favorite[];
 
   @OneToMany(() => Favorite, (favorite) => favorite.movie, { onDelete: 'SET NULL' })
   favorites: Favorite[];

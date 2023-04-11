@@ -16,7 +16,6 @@ import { Favorite } from './favorites/favorites.entity';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      // type: 'postgres',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT, 3306),
       database: process.env.DB_NAME,
@@ -25,7 +24,7 @@ import { Favorite } from './favorites/favorites.entity';
       entities: [User, Movie, Favorite],
       // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       // autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false, // change to false in production
       logging: true,
     }),
     AuthModule,
